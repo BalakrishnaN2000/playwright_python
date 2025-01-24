@@ -1,0 +1,5 @@
+Metadata-Version: 2.2
+Name: playwright_python
+Version: 0.1
+Requires-Dist: playwright
+Dynamic: requires-dist
