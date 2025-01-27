@@ -1,18 +1,20 @@
 from playwright.sync_api import Page, expect
 
+from playwright_python.pythonautomation.src.pages.LoginPage import LoginPage
 
-def xtest_logout(page: Page):
-    page.goto("https://www.saucedemo.com/")
-    page.locator("#user-name").fill("standard_user")
-    page.locator("#password").fill("secret_sauce")
-    page.locator("#login-button").click()
 
-    products_header = page.locator(".title")
-    expect(products_header).to_have_text("Products")
+def test_logout(set_up_and_tear_down):
+    # page.goto("https://www.saucedemo.com/")
+    # page.locator("#user-name").fill("standard_user")
+    # page.locator("#password").fill("secret_sauce")
+    # page.locator("#login-button").click()
+    page = set_up_and_tear_down
+    login_page = LoginPage(page)
+    credentials = {"username": "standard_user", "password": "secret_sauce"}
+    products_page = login_page.do_login(credentials)
 
-    burger_menu_btn = page.locator("button[id*='burger-menu-btn']")
-    burger_menu_btn.click()
-    logout = page.locator("//a[text()='Logout']")
-    logout.click()
+    expect(products_page.products_header).to_have_text("Products")
 
-    expect(page.locator("#login-button")).to_be_visible()
+    products_page.do_logout()
+
+    expect(login_page.login_button).to_be_visible()
