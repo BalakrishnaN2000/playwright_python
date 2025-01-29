@@ -29,3 +29,11 @@ def test_login_with_no_credentials(set_up_and_tear_down):
 
     expected_error_message = "Epic sadface: Username is required"
     expect(login_page.error_message).to_contain_text(expected_error_message)
+
+
+def test_access_inventory_without_login(set_up_and_tear_down):
+    page = set_up_and_tear_down
+    page.goto("https://www.saucedemo.com/inventory.html")
+    expected_error_msg = "Epic sadface: You can only access '/inventory.html' when you are logged in."
+    login_page = LoginPage(page)
+    expect(login_page.error_message).to_contain_text(expected_error_msg)
