@@ -4,10 +4,6 @@ from playwright_python.pythonautomation.src.pages.LoginPage import LoginPage
 
 
 def test_logout(set_up_and_tear_down):
-    # page.goto("https://www.saucedemo.com/")
-    # page.locator("#user-name").fill("standard_user")
-    # page.locator("#password").fill("secret_sauce")
-    # page.locator("#login-button").click()
     page = set_up_and_tear_down
     login_page = LoginPage(page)
     credentials = {"username": "standard_user", "password": "secret_sauce"}
